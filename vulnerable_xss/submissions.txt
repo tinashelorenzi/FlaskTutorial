@@ -1,0 +1,35 @@
+
+=== New Entry [2025-08-28 17:37:32] ===
+Name: Tinashe McThunder
+Email: tinashe@zaio.io
+Message: Shall I compare thee to a summer's day?
+==================================================
+
+
+=== New Entry [2025-08-28 17:38:13] ===
+Name: <b>Tinashe McThunder</b>
+Email: tinashe@zaio.io
+Message: Shall I compare thee to a summer's day?
+==================================================
+
+
+=== New Entry [2025-08-28 17:39:39] ===
+Name: <script>alertt("Hello world");</script>
+Email: tinashe@zaio.io
+Message: Shall I compare thee to a summer's day?
+==================================================
+
+
+=== New Entry [2025-08-28 17:39:56] ===
+Name: <script>alert("Hello world");</script>
+Email: tinashe@zaio.io
+Message: Shall I compare thee to a summer's day?
+==================================================
+
+
+=== New Entry [2025-08-28 17:44:33] ===
+Name: <script>alert("Hello world");</script>
+Email: tinashe@zaio.io
+Message: Shall I compare thee to a summer's day?
+==================================================
+

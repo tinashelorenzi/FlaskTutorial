@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Submissions - XSS Vulnerable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .warning {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .submissions-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .submissions-content {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning">
+        ⚠️ This page displays raw file content with potential XSS vulnerabilities!
+    </div>
+
+    <div class="submissions-container">
+        <h1>All Form Submissions</h1>
+        
+        <div class="submissions-content">
+            <!-- VULNERABILITY: Displaying file content with |safe filter -->
+            {{ submissions|safe }}
+        </div>
+
+        <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin-top: 20px;">
+            <h4>🔍 Another XSS Vulnerability:</h4>
+            <p>This page displays the raw contents of the text file using <code>|safe</code>. 
+            If any submissions contained JavaScript, it would execute when viewing this page!</p>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="back-btn">Back to Form</a>
+    </div>
+</body>
+</html>

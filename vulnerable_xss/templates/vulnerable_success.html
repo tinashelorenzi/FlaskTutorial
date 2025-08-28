@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submitted - XSS Vulnerable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .warning {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .success-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .user-data {
+            background-color: #e9f7ef;
+            border: 1px solid #27ae60;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .vulnerability-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning">
+        ⚠️ This page demonstrates XSS vulnerabilities - user input is NOT escaped!
+    </div>
+
+    <div class="success-container">
+        <h1>Form Submitted Successfully!</h1>
+        <p>Thank you for your submission. Here's what we received:</p>
+        
+        <div class="user-data">
+            <h3>Your Submission:</h3>
+            <!-- VULNERABILITY: Direct output without escaping using |safe filter -->
+            <p><strong>Name:</strong> {{ user_name|safe }}</p>
+            <p><strong>Email:</strong> {{ user_email|safe }}</p>
+            <p><strong>Message:</strong></p>
+            <div style="border: 1px solid #ddd; padding: 10px; background-color: white;">
+                {{ user_message|safe }}
+            </div>
+        </div>
+
+        <div class="vulnerability-note">
+            <h4>🔍 Security Issue Demonstrated:</h4>
+            <p>This page uses Jinja2's <code>|safe</code> filter, which disables HTML escaping. 
+            Any JavaScript in the user input will execute! In a real application, you should:</p>
+            <ul>
+                <li>Remove <code>|safe</code> filters from user input</li>
+                <li>Use <code>{{ variable }}</code> instead of <code>{{ variable|safe }}</code></li>
+                <li>Sanitize input server-side</li>
+                <li>Use Content Security Policy headers</li>
+            </ul>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="back-btn">Submit Another Form</a>
+        <a href="{{ url_for('view_submissions') }}" class="back-btn">View All Submissions</a>
+    </div>
+</body>
+</html>

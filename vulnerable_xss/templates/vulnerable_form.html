@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Vulnerable Form - Educational Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .warning {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .nav-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .nav-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .exploit-examples {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .exploit-examples h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .exploit-examples code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning">
+        ⚠️ WARNING: This is an intentionally vulnerable application for educational purposes only! 
+        Do not deploy this in production!
+    </div>
+
+    <div class="form-container">
+        <h1>Contact Form (XSS Vulnerable Version)</h1>
+        
+        <form action="{{ url_for('submit_form') }}" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Form</button>
+        </form>
+
+        <div class="nav-links">
+            <a href="{{ url_for('view_submissions') }}">View All Submissions</a> |
+            <a href="{{ url_for('search') }}?q=test">Search Example</a>
+        </div>
+
+        <div class="exploit-examples">
+            <h3>XSS Testing Payloads (for educational purposes):</h3>
+            <p><strong>Basic Alert:</strong> <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
+            <p><strong>Image with Error:</strong> <code>&lt;img src="x" onerror="alert('XSS')"&gt;</code></p>
+            <p><strong>Input Focus:</strong> <code>&lt;input onfocus="alert('XSS')" autofocus&gt;</code></p>
+            <p><strong>SVG Payload:</strong> <code>&lt;svg onload="alert('XSS')"&gt;&lt;/svg&gt;</code></p>
+            <p>Try entering these in the form fields to see the vulnerabilities in action!</p>
+        </div>
+    </div>
+</body>
+</html>
